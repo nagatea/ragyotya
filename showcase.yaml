@@ -1,0 +1,4 @@
+work_dir: dist
+
+image: runtime/node
+startup: npm i && npm run build
