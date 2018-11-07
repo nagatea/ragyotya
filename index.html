@@ -33,6 +33,7 @@
       </div>
       <div id="ragyotya">
         <h3>{{ message.join('・') }}{{ message.length > 1 ? 'セット' : '' }}</h3>
+        {{ console.log(getEmojiCode()) }}
       </div>
 
       <!--画像読み込み用-->
@@ -78,6 +79,15 @@
             word = word.replace(/餃/g, '<img src="./assets/gyo_han.png">')
             word = word.replace(/チャ/g, '<img src="./assets/tya_han.png">')
             word = word.replace(/セット/g, '<img src="./assets/set2.png">')            
+            return word
+          },
+          getEmojiCode() {
+            let word = this.message.join('・')　+ (this.message.length > 1 ? 'セット' : '')
+            word = word.replace(/・/g, ':ragyotya_dot:')
+            word = word.replace(/ラ/g, ':ragyotya_ra:')
+            word = word.replace(/餃/g, ':ragyotya_gyo:')
+            word = word.replace(/チャ/g, ':ragyotya_tya:')
+            word = word.replace(/セット/g, ':ragyotya_set:')            
             return word
           }
         },
