@@ -7,21 +7,25 @@
     <br>
     <button v-on:click="copy()">クリップボードにコピー</button>
     <button v-on:click="tweet()">ツイート</button>
-    <button v-on:click="message=[]">リセット</button>
+    <button v-on:click="reset()">リセット</button>
+    <button v-on:click="gererateImage()">画像を生成</button>
 
     <br>
-    <div id="image">
-      <span v-html="getImage()" class="image"></span>
-    </div>
-    <div class="back-box">
-      <div id="han-image">
-        <span v-html="getHanImage()" class="image"></span>
+    <div id="canvas">
+      <div id="image">
+        <span v-html="getImage()" class="image"></span>
       </div>
-      <div class="back-box" style="height: 50px;"></div>
+      <div class="back-box">
+        <div id="han-image">
+          <span v-html="getHanImage()" class="image"></span>
+        </div>
+        <div class="back-box" style="height: 50px;"></div>
+      </div>
     </div>
     <div id="ragyotya">
       <h3>{{ message.join('・') }}{{ message.length > 1 ? 'セット' : '' }}</h3>
     </div>
+    <div id="ragyotya-image"></div>
 
     <!--画像読み込み用-->
     <div class="not-display">
@@ -35,11 +39,13 @@
       <img src="./assets/set.png">
       <img src="./assets/set2.png">
       <img src="./assets/null.png">
+      <a id="download_link"></a>
     </div>
   </div>
 </template>
 
 <script>
+import html2canvas from 'html2canvas'
 export default {
   data () {
     return {
@@ -51,8 +57,16 @@ export default {
     copy: function () {
       navigator.clipboard.writeText(document.getElementById('ragyotya').textContent)
     },
-    tweet: function () {
-      location.href = 'https://twitter.com/intent/tweet?text=' + this.message.join('・') + (this.message.length > 1 ? 'セット' : '') + ' %0Ahttps://nagatech.trap.show/ragyotya/'
+    reset () {
+      this.message = []
+      document.getElementById('ragyotya-image').textContent = null
+    },
+    tweet (canvas) {
+      if (canvas) {
+        //
+      } else {
+        location.href = 'https://twitter.com/intent/tweet?text=' + this.message.join('・') + (this.message.length > 1 ? 'セット' : '') + ' %0Ahttps://nagatech.trap.show/ragyotya/'
+      }
     },
     getImage () {
       let word = this.message.join('・') + (this.message.length > 1 ? 'セット' : '')
@@ -80,6 +94,15 @@ export default {
       word = word.replace(/チャ/g, ':ragyotya_tya:')
       word = word.replace(/セット/g, ':ragyotya_set:')
       return word
+    },
+    gererateImage () {
+      html2canvas(document.getElementById('canvas')).then(function (canvas) {
+        document.getElementById('ragyotya-image').appendChild(canvas)
+        const downloadLink = document.getElementById('download_link')
+        downloadLink.href = canvas.toDataURL('image/png')
+        downloadLink.download = 'result.png'
+        downloadLink.click()
+      })
     }
   }
 }
