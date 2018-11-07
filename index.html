@@ -28,6 +28,9 @@
       <div id="image">
         <span v-html="getImage()" class="image"></span>
       </div>
+      <div id="han-image">
+        <span v-html="getHanImage()" class="image"></span>
+      </div>
       <div id="ragyotya">
         <h3>{{ message.join('・') }}{{ message.length > 1 ? 'セット' : '' }}</h3>
       </div>
@@ -54,6 +57,14 @@
             word = word.replace(/餃/g, '<img src="./assets/gyo.png">')
             word = word.replace(/チャ/g, '<img src="./assets/tya.png">')
             word = word.replace(/セット/g, '<img src="./assets/set.png">')            
+            return word
+          },
+          getHanImage() {
+            let word = this.message.join('')　+ (this.message.length > 1 ? 'セット' : '')
+            word = word.replace(/ラ/g, '<img src="./assets/ra_han.png">')
+            word = word.replace(/餃/g, '<img src="./assets/gyo_han.png">')
+            word = word.replace(/チャ/g, '<img src="./assets/tya_han.png">')
+            word = word.replace(/セット/g, '<img src="./assets/set2.png">')            
             return word
           }
         },
