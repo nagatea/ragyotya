@@ -10,3 +10,7 @@ img {
   display: inline-block;
   background-image: url("./assets/back.png")
 }
+
+.not-display {
+  display: none;
+}
