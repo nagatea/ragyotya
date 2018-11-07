@@ -9,9 +9,11 @@
     <button v-on:click="tweet()">ツイート</button>
     <button v-on:click="reset()">リセット</button>
     <button v-on:click="gererateImage()">画像を生成</button>
+    <br>
+    幅を指定 <input v-model.number="width" type="number"> px
 
     <br>
-    <div id="canvas">
+    <div id="canvas" :style="getWidth()">
       <div id="image">
         <span v-html="getImage()" class="image"></span>
       </div>
@@ -50,7 +52,8 @@ export default {
   data () {
     return {
       message: [],
-      image: []
+      image: [],
+      width: null
     }
   },
   methods: {
@@ -61,12 +64,8 @@ export default {
       this.message = []
       document.getElementById('ragyotya-image').textContent = null
     },
-    tweet (canvas) {
-      if (canvas) {
-        //
-      } else {
-        location.href = 'https://twitter.com/intent/tweet?text=' + this.message.join('・') + (this.message.length > 1 ? 'セット' : '') + ' %0Ahttps://nagatech.trap.show/ragyotya/'
-      }
+    tweet () {
+      location.href = 'https://twitter.com/intent/tweet?text=' + this.message.join('・') + (this.message.length > 1 ? 'セット' : '') + '%0Ahttps://nagatech.trap.show/ragyotya/'
     },
     getImage () {
       let word = this.message.join('・') + (this.message.length > 1 ? 'セット' : '')
@@ -103,6 +102,11 @@ export default {
         downloadLink.download = 'result.png'
         downloadLink.click()
       })
+    },
+    getWidth () {
+      if (this.width && this.width > 0 && this.width < 3000) {
+        return `width: ${this.width}px`
+      }
     }
   }
 }
@@ -143,6 +147,10 @@ export default {
 
   .not-display {
     display: none;
+  }
+
+  input {
+    width: 50px;
   }
 
   @media (max-width : 480px) {
