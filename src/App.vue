@@ -121,4 +121,12 @@ export default {
   .not-display {
     display: none;
   }
+
+  @media (max-width : 480px) {
+  #han-image {
+    position: relative;
+    width: 70%;
+    background-image: url("./assets/back.png")
+  }
+}
 </style>
