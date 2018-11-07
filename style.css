@@ -5,3 +5,8 @@ h1 {
 img {
   height: 50px;
 }
+
+.image {
+  display: inline-block;
+  background-image: url("./assets/back.png")
+}
