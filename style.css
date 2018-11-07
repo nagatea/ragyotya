@@ -3,11 +3,30 @@ h1 {
 }
 
 img {
-  height: 50px;
+  height: 40px;
+}
+
+#image {
+  background-image: url("./assets/back.png")
 }
 
 .image {
+  height: 50px;
   display: inline-block;
+}
+
+#han-image {
+  position: relative;
+  width: 85%;
+  background-image: url("./assets/back.png")
+}
+
+.han-image {
+  height: 100px;
+  position: absolute;
+}
+
+.back-box {
   background-image: url("./assets/back.png")
 }
 
