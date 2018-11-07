@@ -17,7 +17,7 @@ img {
 
 #han-image {
   position: relative;
-  width: 85%;
+  width: 90%;
   background-image: url("./assets/back.png")
 }
 
@@ -32,4 +32,12 @@ img {
 
 .not-display {
   display: none;
+}
+
+@media (max-width : 480px) {
+  #han-image {
+    position: relative;
+    width: 70%;
+    background-image: url("./assets/back.png")
+  }
 }
