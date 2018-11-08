@@ -8,9 +8,10 @@
     <button v-on:click="copy()">クリップボードにコピー</button>
     <button v-on:click="tweet()">ツイート</button>
     <button v-on:click="reset()">リセット</button>
-    <button v-on:click="gererateImage()">画像を生成</button>
     <br>
     幅を指定 <input v-model.number="width" type="number"> px
+    <button v-on:click="gererateImage()">画像を生成</button>
+    <button v-on:click="saveImage()">保存</button>
 
     <br>
     <div id="canvas" :style="getWidth()">
@@ -41,7 +42,7 @@
       <img src="./assets/set.png">
       <img src="./assets/set2.png">
       <img src="./assets/null.png">
-      <a id="download_link"></a>
+      <a id="download-link"></a>
     </div>
   </div>
 </template>
@@ -97,7 +98,11 @@ export default {
     gererateImage () {
       html2canvas(document.getElementById('canvas')).then(function (canvas) {
         document.getElementById('ragyotya-image').appendChild(canvas)
-        const downloadLink = document.getElementById('download_link')
+      })
+    },
+    saveImage () {
+      html2canvas(document.getElementById('canvas')).then(function (canvas) {
+        const downloadLink = document.getElementById('download-link')
         downloadLink.href = canvas.toDataURL('image/png')
         downloadLink.download = 'result.png'
         downloadLink.click()
